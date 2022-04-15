@@ -16,7 +16,7 @@ for i in range(379):
 	b.reverse()								# dump is little-endian
 
 	if i % 20 != 19:
-		print("0x" + "".join(b) + "n,", end="")
+		print("0x" + "".join(b) + "n, ", end="")
 		printouts += 1
 		if printouts % 3 == 0:
 			print()
