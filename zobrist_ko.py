@@ -1,6 +1,6 @@
 # This extracts the ko zobrists from the relevant memory dump.
 
-# Note that there seems to be some padding for some reason, i.e. the dump has 379 hashes.
+# Note that there seems to be some padding between rows, i.e. the dump has 379 hashes.
 # So we ignore positions 19, 38, etc, etc...
 
 with open("katago_ko_memdump.txt") as infile:
