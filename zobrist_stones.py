@@ -74,10 +74,10 @@ def nice_hex(i):
 # -------------------------------------------------------------------------------------------------
 
 send_query([], "B")
-b_19x19 = receive_and_extract_hash()
+empty_b_to_play = receive_and_extract_hash()
 
 send_query([], "W")
-w_19x19 = receive_and_extract_hash()
+empty_w_to_play = receive_and_extract_hash()
 
 for stone_colour in ["B", "W"]:
 
@@ -89,8 +89,8 @@ for stone_colour in ["B", "W"]:
 	for y in range(19):
 		for x in range(19):
 			stones = [[stone_colour, xy_to_gtp(x, y)]]
-			send_query(stones, "B")							# Always Black to play...
-			h = receive_and_extract_hash() ^ b_19x19		# XOR against the empty position to get what difference this stone made.
+			send_query(stones, "B")								# Always Black to play...
+			h = receive_and_extract_hash() ^ empty_b_to_play	# XOR against the empty position to get what difference this stone made.
 			print(nice_hex(h) + ", ", end="")
 			done += 1
 			if (done % 3 == 0):
@@ -99,7 +99,7 @@ for stone_colour in ["B", "W"]:
 
 print()
 print("B TO PLAY...")
-print(nice_hex(b_19x19))
+print(nice_hex(empty_b_to_play))
 
 print("W TO PLAY...")
-print(nice_hex(w_19x19))
+print(nice_hex(empty_w_to_play))
