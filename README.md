@@ -1,7 +1,13 @@
 Files:
 
-* `katago_board_421_memdump.txt` - memdump of KataGo's zobrist array for stones.
-* `katago_ko_421_memdump.txt` - memdump of KataGo's zobrist array for ko locations.
+* `katago_board_421_memdump.txt` - KataGo's zobrist array for stones.
+* `katago_ko_421_memdump.txt` - KataGo's zobrist array for ko locations.
+* `20_mystery_values.txt` - these turned out to be the width array.
+* `24_mystery_values.txt` - these turned out to be the height array and the player array (4 players).
+
+Scripts:
+
+* `raw_print.py` - just prints usable values from any dump file.
 * `zobrist_board_421.py` - prints usable stone values.
 * `zobrist_ko_421.py` - prints usable ko values.
 
