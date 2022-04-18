@@ -8,5 +8,5 @@ Files:
 Notes:
 
 * KataGo's zobrist arrays are length 421 due to padding.
-* The correct index for (x, y) is `x + 1 + ((y + 1) * (width + 1))` - see Location::getLoc().
+* The correct index for (x, y) is `x + 1 + ((y + 1) * (width + 1))` - see `Location::getLoc()`.
 * The stones array is laid out as 16 zeroes, followed by a Black value, followed by a White value, followed by 16 zeroes.
