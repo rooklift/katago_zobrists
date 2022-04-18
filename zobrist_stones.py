@@ -24,14 +24,19 @@ def send(o):
 	p.stdin.write(s.encode("utf8"))
 	p.stdin.flush()
 
-def send_query(id_string, stones, player):
+next_id = 0
 
-	assert(type(id_string) is str)
+def next_id_string():
+	next_id += 1
+	return "query_{}".format(next_id)
+
+def send_query(stones, player):
+
 	assert(type(stones) is list)
 	assert(player in ["B", "W"])
 	
 	d = {
-		"id": id_string,
+		"id": next_id_string(),
 		"moves": [],
 		"rules": "Chinese",
 		"komi": 7.5,
@@ -67,10 +72,10 @@ def nice_hex(i):
 
 # -------------------------------------------------------------------------------------------------
 
-send_query("b_19x19", [], "B")
+send_query([], "B")
 b_19x19 = receive_and_extract_hash()
 
-send_query("w_19x19", [], "W")
+send_query([], "W")
 w_19x19 = receive_and_extract_hash()
 
 for stone_colour in ["B", "W"]:
@@ -83,8 +88,8 @@ for stone_colour in ["B", "W"]:
 	for y in range(19):
 		for x in range(19):
 			stones = [[stone_colour, xy_to_gtp(x, y)]]
-			send_query("{},{}".format(x, y), stones, "B")		# Always Black to play...
-			h = receive_and_extract_hash() ^ b_19x19			# XOR against the empty position to get what difference this stone made.
+			send_query(stones, "B")							# Always Black to play...
+			h = receive_and_extract_hash() ^ b_19x19		# XOR against the empty position to get what difference this stone made.
 			print(nice_hex(h) + ", ", end="")
 			done += 1
 			if (done % 3 == 0):
