@@ -27,6 +27,7 @@ def send(o):
 next_id = 0
 
 def next_id_string():
+	global next_id
 	next_id += 1
 	return "query_{}".format(next_id)
 
