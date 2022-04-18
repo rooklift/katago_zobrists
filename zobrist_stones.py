@@ -1,5 +1,8 @@
 import json, subprocess, threading, time
 
+WIDTH = 19
+HEIGHT = 19
+
 # -------------------------------------------------------------------------------------------------
 # Dealing with the KataGo process...
 
@@ -41,8 +44,8 @@ def send_query(stones, player):
 		"moves": [],
 		"rules": "Chinese",
 		"komi": 7.5,
-		"boardXSize": 19,
-		"boardYSize": 19,
+		"boardXSize": WIDTH,
+		"boardYSize": HEIGHT,
 		"initialStones": stones,
 		"initialPlayer": player,
 		"maxVisits": 1,
@@ -62,7 +65,7 @@ def xy_to_gtp(x, y):
 	x_ascii = x + 65
 	if x_ascii >= ord("I"):
 		x_ascii += 1
-	y = 19 - y
+	y = HEIGHT - y
 	return chr(x_ascii) + str(y)
 
 def nice_hex(i):
@@ -86,8 +89,8 @@ for stone_colour in ["B", "W"]:
 
 	done = 0
 
-	for y in range(19):
-		for x in range(19):
+	for y in range(HEIGHT):
+		for x in range(WIDTH):
 			stones = [[stone_colour, xy_to_gtp(x, y)]]
 			send_query(stones, "B")								# Always Black to play...
 			h = receive_and_extract_hash() ^ empty_b_to_play	# XOR against the empty position to get what difference this stone made.
@@ -98,8 +101,8 @@ for stone_colour in ["B", "W"]:
 
 
 print()
-print("B TO PLAY...")
+print("B TO PLAY, {}x{}".format(WIDTH, HEIGHT))
 print(nice_hex(empty_b_to_play))
 
-print("W TO PLAY...")
+print("W TO PLAY, {}x{}".format(WIDTH, HEIGHT))
 print(nice_hex(empty_w_to_play))
