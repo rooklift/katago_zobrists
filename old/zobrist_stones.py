@@ -1,4 +1,4 @@
-import json, subprocess, threading, time
+import json, subprocess
 
 WIDTH = 19
 HEIGHT = 19
